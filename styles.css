@@ -1,316 +1,874 @@
+/* Basic Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Header Styling */
 header {
-    background-color: #fff;
-    padding: 30px 40px;
-    font-family: 'Poppins', sans-serif;
-    border-bottom: 1px solid #555;
+    position: fixed; /* Fixa o elemento na janela de visualização */
+    top: 0; /* Alinha o topo do header ao topo da janela */
+    left: 0; /* Alinha a esquerda do header à esquerda da janela */
+    width: 100%; /* Faz com que o header ocupe toda a largura */
+    background-color: #fff; /* Fundo branco para o header */
+    z-index: 1000; /* Garante que o header fique acima de outros elementos */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 
+/* CORREÇÃO: Aplicar flexbox ao contêiner dentro do header */
+header .container {
+    display: flex; /* Organiza logo e nav lado a lado */
+    justify-content: space-between; /* Empurra logo para a esquerda e nav para a direita */
+    align-items: center; /* Alinha itens verticalmente */
+    padding-top: 0.75rem; /* Espaço acima do header */
+    padding-bottom: 0.75rem; /* Espaço abaixo do header */
+}
+
+/* Body Styling */
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #fff;
-    color: #111;
+    margin: 0;
+    font-family: sans-serif; /* Use uma fonte adequada, talvez Google Fonts */
+    background-color: #f0f0f0; /* Cor de fundo clara, similar à imagem */
+    color: #333;
+    line-height: 1.6;
 }
 
+/* Estilos para as seções adicionadas */
 section {
-    padding: 40px;
-    margin: 10px;
-    border-bottom: #555 solid 2px;
+    padding: 1.5rem 6.25rem; /* Adiciona padding vertical às seções */
 }
 
-footer {
-    padding: 30px;
-    margin: 10px;
+nav ul {
+    list-style: none; /* Remove marcadores de lista */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Organiza os itens da navegação lado a lado */
 }
 
-p {
-    font-size: 18px;
-    margin-bottom: 10px;
+nav ul li {
+    margin-left: 1.875rem; /* Espaço entre os itens do menu */
+}
+
+nav ul li a {
+    text-decoration: none; /* Remove sublinhado */
+    color: #555;
+    font-weight: 500;
+    transition: color 0.3s ease; /* Transição suave de cor ao passar o mouse */
+}
+
+nav ul li a:hover {
+    color: #007bff; /* Cor de destaque no hover */
 }
 
 h1 {
-    font-size: 25px;
+    font-size: 2.5rem; /* Ajusta o tamanho do título principal no mobile */
 }
 
 h2 {
-    font-size: 25px;
-    margin-bottom: 30px;
-    margin-top: 30px;
+    font-size: 1.875rem; /* Aumentei um pouco o tamanho dos títulos de seção */
+    text-align: center; /* Centraliza os títulos das seções */
+    color: #111;
+    margin-bottom: 1.25rem; /* Espaço abaixo do título */
 }
 
 h3 {
-    font-size: 22px;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    font-size: 1.375rem; /* Aumentei um pouco o tamanho dos títulos de seção */
+    margin-bottom: 0.9375rem; /* Ajustei um pouco */
+    margin-top: 0; /* Removi o margin-top que estava no seu código para h3 */
+    color: #111;
 }
 
 h4 {
-    font-size: 18px;
-    margin-bottom: 25px;
-}
-
-ul {
-    margin-left: 30px;
-    margin-bottom: 15px;
-}
-
-li {
-    font-size: 15px;
-    margin-bottom: 10px;
-}
-
-footer {
-    background-color: #fff;
+    font-size: 1.125rem; /* Aumentei um pouco o tamanho dos títulos de seção */
+    margin-bottom: 0.9375rem; /* Ajustei um pouco */
     color: #111;
-    padding: 20px;
+}
+
+p { /* Estilo geral para parágrafos, ajuste se necessário */
+    font-size: 1rem; /* Tamanho do texto */
+    margin-bottom: 0.5rem; /* Espaço abaixo do parágrafo */
+}
+
+/* Footer Styling */
+footer { /* Usei apenas footer como seletor */
+    background-color: #f8f8f8; /* Cor de fundo leve para o footer */
+    color: #555; /* Cor do texto */
+    padding: 1.25rem 0; /* Ajuste o padding */
     text-align: center;
-    margin-top: auto;
+    margin-top: 2.5rem; /* Espaço acima do footer */
 }
 
-.navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 auto;
+footer h2 {
+     font-size: 1.5rem; /* Ajustei o tamanho do título no footer */
+     margin-bottom: 0.625rem;
+     cursor: default; /* Removi o cursor pointer */
+     color: #111;
 }
 
-.left {
-    margin-left: 0;
-}
-
-.left a {
-    font-size: 22px;
-}
-
-.right {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
-
-.nav-link {
+footer p {
+    color: #555; /* Cor do texto do parágrafo no footer */
+    margin: 0 1rem;
     text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-block; /* Para que os parágrafos fiquem na mesma linha se houver mais de um */
+}
+
+footer p:hover {
+    text-decoration: underline;
     color: #111;
-    font-family: Arial, sans-serif;
-    font-size: 15px;
+}
+
+/* Container Reusable Style */
+.container {
+    width: 90%;
+    max-width: 1200px; /* Largura máxima para telas maiores */
+    margin: 0 auto; /* Centraliza o contêiner */
+    padding: 0 1.25rem; /* Adiciona padding nas laterais */
+}
+
+/* Estilo para o botão do menu sanduíche - Escondido por padrão no desktop */
+.hamburger-menu {
+    display: none; /* Esconde o botão no desktop */
+    background: none;
+    border: none;
+    font-size: 1.8rem; /* Tamanho do ícone */
+    cursor: pointer;
+    color: #333; /* Cor do ícone */
+    padding: 0.5rem; /* Adiciona área clicável */
     transition: color 0.3s ease;
 }
 
-.nav-link:hover {
-    text-decoration: underline;
-    color: #111;  
+.hamburger-menu:hover {
+    color: #007bff;
 }
 
+/* Hero Section Styling */
 .hero-section {
-    display: flex;
+    padding: 8.125rem 0 11rem 0; /* Ajuste o padding conforme necessário */
+    position: relative; /* Necessário para o posicionamento absoluto da imagem/forma */
+    overflow: hidden; /* Esconde qualquer transbordamento da forma abstrata */
+}
+
+.hero-section .container {
+    display: flex; /* Organiza conteúdo e imagem lado a lado */
+    align-items: center; /* Alinha itens verticalmente */
+    gap: 2.5rem; /* Espaço entre o conteúdo e a imagem */
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #111;
 }
 
 .hero-content {
-    flex: 1;
-    padding: 20px;
+    flex: 1; /* Permite que o conteúdo ocupe o espaço disponível */
+    max-width: 600px; /* Limita a largura do conteúdo */
+    z-index: 1; /* Garante que o conteúdo fique acima da forma abstrata */
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin: 0 0 0.625rem 0;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem; /* Ajuste o tamanho conforme necessário */
+    margin: 0 0 1.25rem 0;
+    line-height: 1.1;
+}
+
+.contact-button {
+    display: inline-block;
+    background-color: #007bff; /* Cor azul do botão */
+    color: #fff;
+    padding: 0.75rem 1.5625rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.125rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-button a {
+    color: #fff; /* Cor do texto do link */
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.contact-button:hover {
+    background-color: #0056b3; /* Azul mais escuro no hover */
+}
+
+.social-links {
+    margin-top: 1.875rem; /* Espaço acima dos ícones sociais */
+    font-size: 1.5rem; /* Tamanho dos ícones sociais */
+}
+
+.social-links a {
+    color: #555; /* Cor dos ícones */
+    margin-right: 0.9375rem; /* Espaço entre os ícones */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #007bff; /* Cor de destaque no hover */
 }
 
 .hero-image {
-    flex: 1;
+    flex: 1; /* Permite que o contêiner da imagem ocupe o espaço disponível */
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Centraliza o contêiner da imagem */
     align-items: center;
+    position: relative; /* Necessário para o posicionamento da forma */
+}
+
+.image-container {
+    position: relative; /* Necessário para posicionar a forma em relação à imagem */
+    width: 25rem; /* Ajuste o tamanho conforme necessário */
+    height: 25rem; /* Ajuste o tamanho conforme necessário */
+}
+
+.image-container img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem cubra o contêiner */
+    /* border-radius: 50%; /* Descomente se quiser a imagem redonda */
+    z-index: 2; /* Garante que a imagem fique acima da forma */
+    position: relative; /* Posiciona a imagem */
+}
+
+.abstract-shape {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 31.25rem; /* Ajuste o tamanho da forma */
+    height: 31.25rem; /* Ajuste o tamanho da forma */
+    background-color: #007bff; /* Cor azul para a forma */
+    border-radius: 40% 60% 70% 30% / 60% 30% 70% 40%;
+    transform: translate(-50%, -50%); /* Centraliza a forma */
+    z-index: 0; /* Posiciona atrás da imagem */
+    filter: blur(3.125rem); /* Adiciona um desfoque nas bordas */
+}
+
+/* Floating Sidebar Styling */
+.floating-sidebar {
+    position: fixed; /* Mantém fixo na viewport */
+    right: 0.75rem; /* Distância da borda direita */
+    top: 50%; /* Começa no centro vertical */
+    transform: translateY(-50%); /* Centraliza verticalmente */
+    display: flex;
+    flex-direction: column; /* Empilha os itens verticalmente */
+    gap: 0.125rem; /* Espaço entre os itens */
+    background-color: #fff;
+    padding: 0.25rem;
+    border-radius: 8px;
+    box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
+    z-index: 10; /* Garante que fique por cima de outros elementos */
+}
+
+.sidebar-item {
+    display: flex;
+    flex-direction: column; /* Empilha ícone e texto */
+    align-items: center; /* Centraliza itens horizontalmente */
+    font-size: 0.875rem;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 0.3125rem; /* Adiciona padding para aumentar a área clicável */
+    border-radius: 4px; /* Bordas arredondadas */
+}
+
+.sidebar-item i {
+    font-size: 1.5rem; /* Tamanho dos ícones */
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-item:hover {
+    color: #007bff; /*de destaque */
+}
+
+/* Opcional: Estilos para quando um item é clicado (estado ativo) */
+.sidebar-item.liked i,
+.sidebar-item.liked span {
+    color: #007bff; /* Exemplo: Cor azul para likes clicados */
+    font-weight: bold; /* Destaca o texto */
+}
+
+/* Você pode adicionar um estilo para dislikes clicados também, mas sem mostrar a contagem */
+.sidebar-item.disliked i,
+.sidebar-item.disliked span {
+    color: #ff0000; /* Exemplo: Cor vermelha para dislikes clicados */
+    font-weight: bold; /* Destaca o texto */
 }
 
 .about-me p {
-    font-size: 20px;
-    margin-bottom: 40px;
+    font-size: 1.25rem;
 }
 
-.projects-highlight {
+/* Contêineres de Grid para Projetos e Habilidades */
+.main-content-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 colunas */
-    gap: 20px; /* Espaço entre os itens */
+    grid-template-columns: 1fr 1fr; /* Duas colunas de largura igual */
+    gap: 3rem; /* Espaçamento entre as colunas e linhas */
+    max-width: 1200px; /* Adapte conforme o design do seu portfólio */
+    margin: 3rem auto; /* Centraliza o container e adiciona margem superior/inferior */
+    padding: 0 1.25rem; /* Padding nas laterais, mantendo o do .container */
 }
 
-.project-card {
-    background-color: #a1a1a1;
-    padding: 10px;
-    border-radius: 15px; /* Bordas arredondadas */
-    box-shadow: 0 4px 8px #555; /* Sombra para destaque */
+/* Ajustes para a seção de Destaques Técnicos para se alinhar ao grid */
+.destaques-tecnicos {
+    padding: 1rem; /* Adiciona um padding interno para a seção */
+    background-color: #f8f8f8; /* Pode adicionar um fundo para destacar */
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
+
+.destaques-tecnicos h2 {
+    text-align: left; /* Alinha o título à esquerda na coluna */
+    margin-bottom: 1.5rem;
+    font-size: 1.875rem; /* Garante o tamanho correto */
+}
+
+.destaques-tecnicos ul {
+    list-style: none; /* Remove marcadores de lista padrão */
+    padding: 0;
+}
+
+.destaques-tecnicos li {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: #555;
+    font-size: 1.1rem;
+}
+
+/* A seção .projects-container agora é um item do grid principal */
+.projects-container {
+    padding: 1rem; /* Padding interno para a seção */
+    background-color: #f8f8f8; /* Pode adicionar um fundo para destacar */
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* MODIFICADO: Aplicar flexbox para organizar os project-card dentro de projects-highlight */
+/* Este é o container dos cards de "Projetos Relevantes" */
+.projects-highlight {
+    display: flex;
+    flex-direction: column; /* Empilha os cards verticalmente */
+    gap: 1.25rem; /* Espaçamento entre os cards */
+    margin-top: 1.25rem; /* Espaço entre o título "Projetos Relevantes" e o primeiro card */
+}
+
+/* Estilos para os Itens do Grid (Cards de Projetos Relevantes) */
+.project-card {
+    padding: 1.25rem; /* Padding para desktop */
+    background-color: #007bffb4;
+    border-radius: 15px;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #fff;
+}
+
+.projects-container h2 { /* MODIFICADO: Específico para o h2 dentro de projects-container */
+    text-align: left; /* Alinha o título "Projetos Relevantes" à esquerda */
+    margin-bottom: 1.25rem; /* Espaço abaixo do título */
+    font-size: 1.875rem; /* Garante o tamanho correto */
+}
+
+.project-card h3 {
+    color: #fff; /* Cor do título */
+}
+
+.project-card p {
+    font-size: 0.9375rem; /* Aumentei um pouco o tamanho do texto */
+    margin-bottom: 0.625rem; /* Espaço abaixo do parágrafo */
+    color: #fff; /* Cor do texto */
+}
+
 .project-card:hover {
     transform: scale(1.01); /* Aumenta o tamanho ao passar o mouse */
-    transition: transform 0.3s ease; /* Transição suave */
+    box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.3); /* Sombra mais intensa no hover */
+}
+
+.experience-card {
+    margin-bottom: 1.875rem; /* Espaço entre os cards de experiência */
 }
 
 .timeline span {
     font-style: italic;
-    font-size: 10px;
+    font-size: 0.875rem; /* Aumentei um pouco o tamanho */
+    display: block; /* Para que fique em uma nova linha */
+    margin-bottom: 0.3125rem; /* Espaço abaixo do span */
 }
 
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Colunas flexíveis */
-    gap: 20px; /* Espaço entre os itens */
-}
-  
-.skill-category {
-    padding: 10px; /* Espaçamento interno */
-    background-color: #a1a1a1; /* Cor de fundo para as colunas */
-    border-radius: 15px; /* Bordas arredondadas */
-    box-shadow: 0 4px 8px #555; /* Sombra para destaque */
+/* Estilos para as categorias de habilidades (agora como cards) */
+.skill-category.card {
+    background-color: #ffffff; /* Fundo branco para os cards para um visual limpo */
+    border: none; /* Remove a borda padrão do card */
+    border-radius: 0.75rem; /* Borda arredondada para os cards */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1); /* Sombra mais suave e profissional */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* Garante que o conteúdo não vaze */
+    margin-bottom: 2rem; /* Espaço entre os cards */
 }
 
-.skill-category:hover {
-    transform: scale(1.01); /* Aumenta o tamanho ao passar o mouse */
-    transition: transform 0.3s ease; /* Transição suave */
+.skill-category.card:hover {
+    transform: translateY(-5px); /* Efeito de "levantar" ao passar o mouse */
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15); /* Sombra um pouco mais forte no hover */
+}
+
+.skill-category .card-header {
+    background-color: #007bffb4; /* Cor azul primária do Bootstrap para o cabeçalho */
+    color: #ffffff; /* Texto branco no cabeçalho */
+    padding: 1.25rem 1rem;
+    border-bottom: none; /* Remove a borda padrão do cabeçalho */
+    border-top-left-radius: 0.75rem; /* Arredonda as bordas superiores do cabeçalho */
+    border-top-right-radius: 0.75rem;
 }
 
 .skill-category h3 {
-    margin-left: 10px;
+    color: #ffffff; /* Título da categoria branco para contraste no cabeçalho azul */
+    font-size: 1.5rem; /* Tamanho do título da categoria */
+    margin-bottom: 0; /* Remove margem inferior padrão do h3 */
+    font-weight: 600;
 }
 
-.projects-container {
+/* Estilos para a lista de habilidades dentro do card */
+.skills-list.list-group-flush {
+    padding: 0;
+    margin: 0;
+}
+
+.skills-list .list-group-item {
+    background-color: transparent; /* Fundo transparente para os itens da lista */
+    border-left: none;
+    border-right: none;
+    border-color: rgba(0, 0, 0, 0.08); /* Cor da borda suave entre os itens */
+    color: #495057; /* Cor do texto para os itens da lista */
+    font-size: 1.05rem; /* Tamanho da fonte dos itens da lista */
+    padding: 0.75rem 1.25rem; /* Espaçamento interno dos itens */
+    display: flex; /* Para alinhar ícone e texto */
+    align-items: center; /* Centraliza verticalmente ícone e texto */
+}
+
+/* Último item da lista sem borda inferior */
+.skills-list .list-group-item:last-child {
+    border-bottom: none;
+}
+
+/* Estilo para os ícones */
+.skills-list .list-group-item i {
+    color: #007bff; /* Cor do ícone - azul primário do Bootstrap */
+    font-size: 1.2rem; /* Tamanho do ícone */
+    width: 1.5em; /* Garante largura fixa para alinhamento */
+    text-align: center;
+}
+
+.projects-content {
+    padding: 2rem 0; /* Padding superior e inferior para esta seção separada */
+    max-width: 1200px; /* Alinha com o main-content-grid */
+    margin: 0 auto; /* Centraliza */
+    padding-left: 1.25rem; /* Padding nas laterais */
+    padding-right: 1.25rem; /* Padding nas laterais */
+}
+
+.projects-content h2 { /* O título "Outros Projetos" */
+    text-align: center; /* Centralizado */
+    margin-bottom: 2rem;
+    font-size: 1.875rem;
+}
+
+.projects-content-container { /* Container para os projetos com imagem */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr)); /* Desktop minmax */
+    gap: 1.25rem; /* Desktop gap */
 }
 
 .project {
-    background: #fff;
+    background: #007bffb4;
     border-radius: 10px;
-    padding: 20px;
-    transition: transform 0.3s ease;
+    padding: 1.25rem;
+    box-shadow: 0 0.125rem 0.3125rem rgba(0,0,0,0.1); /* Adicionei sombra padrão */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project:hover {
-    transform: translateY(-5px);
+    transform: translateY(-0.3125rem); /* Levanta o card ao passar o mouse */
+    box-shadow: 0 0.3125rem 0.625rem rgba(0,0,0,0.2);
 }
 
 .project h4 {
-    color: #111;
-    margin-bottom: 15px;
-    font-size: 18px;
+    color: #fff;
+    margin-bottom: 0.625rem; /* Ajustei um pouco */
+    font-size: 1.25rem; /* Aumentei um pouco o tamanho do título do projeto */
+    text-align: center; /* Centraliza o título */
 }
 
 .project-image {
     overflow: hidden;
     border-radius: 8px;
+    margin-bottom: 0.9375rem; /* Adiciona espaço abaixo da imagem */
 }
 
 .clickable-image {
+    display: block; /* Garante que a imagem se comporte como bloco */
     width: 100%;
-    height: 300px;
+    height: 12.5rem; /* Altura fixa para as imagens dos projetos */
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
     transition: transform 0.3s ease;
     cursor: pointer;
 }
 
 .clickable-image:hover {
-    transform: scale(1.03);
+    transform: scale(1.05); /* Aumentei um pouco o zoom */
 }
 
-.footer {
+.comments-container {
+    position: fixed;
+    top: 50%;
+    left: 50%; /* Posição inicial, vamos ajustar com JS */
+    transform: translate(-50%, -50%); /* Centraliza inicialmente */
+    width: 25rem; /* Largura da caixa de comentários */
+    max-height: 80vh; /* Altura máxima baseada na viewport */
     background-color: #fff;
-    color: #111;
-    padding: 20px;
-    text-align: center;
-    margin-top: auto;
-    margin: 10px 0 0;
-  }
-
-.footer h2 {
-    margin-top: 5px;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-  
-.footer p {
-    color: var(--primary-color);
-    margin: 0 1rem;
-    text-decoration: none;
-    font-size: 0.9rem;
-}
-
-.footer p:hover {
-    text-decoration: underline;
-    color: #111;
-}
-
-.contact-info {
-    display: none;
-}
-
-  /* ========== RESPONSIVIDADE MOBILE ========== */
-@media (max-width: 768px) {
-  header {
-    padding: 20px 15px;
-    display: flex;
-    gap: 10px;
-    font-size: 16px;
+    border-radius: 8px;
+    box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.2);
+    z-index: 1001; /* Acima da sidebar */
+    display: none; /* Inicialmente escondido */
     flex-direction: column;
-    align-items: center;
-  }
+    padding: 1.25rem;
+    overflow-y: auto; /* Adiciona scroll se os comentários excederem a altura máxima */
+}
 
-  section {
-    padding: 20px;
-    margin: 5px;
-  }
-
-  .projects-highlight {
-    grid-template-columns: 1fr; /* 1 coluna */
-  }
-
-  .skills-grid {
-    grid-template-columns: 1fr; /* 1 coluna */
-  }
-
-  h1, h2 {
-    font-size: 22px;
-  }
-
-  h3 {
-    font-size: 20px;
-  }
-
-  .header h1 {
-    font-size: 25px;
+.comments-container h4 {
+    margin-top: 0;
+    margin-bottom: 0.9375rem; /* Espaço abaixo do título */
     text-align: center;
-    width: 100%;
-    padding: 0 15px;
-    line-height: 1.4;
-  }
+    color: #333;
+}
 
-  p, .about-me p {
-    font-size: 16px;
-  }
+.comment-input-area {
+    display: flex;
+    margin-bottom: 0.9375rem; /* Espaço abaixo da área de input */
+    gap: 0.625rem; /* Espaço entre o campo de texto e o botão */
+}
 
-  .project-card {
-    margin-bottom: 15px;
-  }
+.comment-input-area input[type="text"] {
+    flex-grow: 1; /* O campo de texto ocupa o máximo de espaço */
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
 
-  .projects-container {
-    grid-template-columns: 1fr; /* 1 coluna */
-  }
+.comment-input-area button {
+    padding: 0.5rem 0.9375rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+}
 
-  .clickable-image {
-    height: 200px; /* Reduz altura da imagem */
-  }
+.comment-input-area button:hover {
+    background-color: #0056b3;
+}
 
-  ul {
-    margin-left: 15px;
-  }
+.comments-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
-  /* Ajusta timeline */
-  .timeline span {
-    display: block;
-    margin-top: 5px;
-  }
+.comments-list li {
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #eee;
+    padding: 0.625rem; /* Espaço interno */
+    margin-bottom: 0.625rem; /* Espaço entre os comentários */
+    border-radius: 4px;
+    font-size: 0.9375rem; /* Tamanho do texto */
+    word-wrap: break-word; /* Quebra palavras longas */
+}
 
-  /* Melhora touch targets */
-  a, button {
-    min-height: 48px;
-    min-width: 48px;
-  }
+.comments-list li:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+/* ========== RESPONSIVIDADE MOBILE ========== */
+   /* --- Media Query para Telas com Largura Máxima de 768px (Mobile/Tablet) --- */
+@media (max-width: 768px) {
+
+    /* --- Ajustes Gerais e Container --- */
+    body {
+        /* Ajuste do padding do body para garantir margens laterais consistentes */
+        padding-top: 4.5rem; /* Ajusta o padding para o header fixo */
+    }
+
+    .container {
+        width: 95%; /* Aumenta a largura do contêiner para ocupar mais espaço na tela */
+        padding: 0 1rem; /* Reduz o padding lateral para telas menores */
+    }
+
+    section {
+        padding: 1.5rem 1rem; /* Ajusta o padding vertical e lateral das seções */
+    }
+
+    /* --- Header e Navegação (Menu Hambúrguer) --- */
+    header .container {
+        padding-top: 0.5rem; /* Reduz o padding do header */
+        padding-bottom: 0.5rem;
+    }
+
+    nav ul {
+        display: none; /* Esconde o menu de navegação padrão no mobile */
+        flex-direction: column; /* Para empilhar os itens quando o menu estiver aberto */
+        width: 100%; /* Ocupa a largura total quando visível */
+        background-color: #fff; /* Fundo do menu aberto */
+        position: absolute; /* Posiciona o menu abaixo do header */
+        top: 3.5rem; /* Abaixo do header */
+        left: 0;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+        z-index: 999; /* Garante que o menu esteja acima de outros elementos */
+        padding: 1rem 0; /* Padding interno para os itens do menu */
+    }
+
+    /* Classe JavaScript para mostrar o menu */
+    nav.active ul {
+        display: flex; /* Exibe o menu quando a classe 'active' é adicionada */
+    }
+
+    nav ul li {
+        margin: 0; /* Remove a margem lateral entre os itens */
+        text-align: center; /* Centraliza o texto dos itens do menu */
+    }
+
+    nav ul li a {
+        display: block; /* Faz o link ocupar toda a largura do item */
+        padding: 0.75rem 1.25rem; /* Aumenta a área clicável */
+        font-size: 1.1rem; /* Ajusta o tamanho da fonte do menu */
+    }
+
+    .hamburger-menu {
+        display: block; /* Exibe o botão do menu hambúrguer no mobile */
+        margin-left: auto; /* Empurra o hambúrguer para a direita no header */
+    }
+
+    .logo {
+        font-size: 1.3rem; /* Reduz o tamanho do logo */
+    }
+
+    /* --- Hero Section --- */
+    .hero-section {
+        padding: 6rem 0 7rem 0; /* Ajusta o padding da seção hero */
+        text-align: center; /* Centraliza o texto no mobile */
+    }
+
+    .hero-section .container {
+        flex-direction: column; /* Empilha o conteúdo e a imagem verticalmente */
+        gap: 2rem; /* Ajusta o espaço entre os elementos empilhados */
+    }
+
+    .hero-content {
+        max-width: 100%; /* Ocupa toda a largura disponível */
+    }
+
+    .hero-content p {
+        font-size: 1.2rem; /* Reduz o tamanho da fonte */
+    }
+
+    .hero-content h1 {
+        font-size: 2.8rem; /* Reduz o tamanho do título principal */
+        margin-bottom: 1rem;
+    }
+
+    .social-links {
+        margin-top: 1.5rem; /* Ajusta a margem superior dos links sociais */
+        font-size: 1.3rem; /* Reduz o tamanho dos ícones sociais */
+    }
+
+    .hero-image {
+        order: -1; /* Move a imagem para cima do conteúdo na versão mobile */
+        margin-bottom: 2rem; /* Adiciona espaço abaixo da imagem */
+    }
+
+    .image-container {
+        width: 18rem; /* Reduz o tamanho do contêiner da imagem */
+        height: 18rem;
+    }
+
+    .abstract-shape {
+        width: 25rem; /* Reduz o tamanho da forma abstrata */
+        height: 25rem;
+        filter: blur(2rem); /* Ajusta o desfoque */
+    }
+
+    /* --- Floating Sidebar --- */
+    .floating-sidebar {
+        right: 0.5rem; /* Mantém uma margem menor na direita */
+        top: auto; /* Remove o top: 50% */
+        bottom: 1rem; /* Posiciona no canto inferior direito */
+        transform: none; /* Remove a transformação de centralização */
+        flex-direction: row; /* Alinha os itens horizontalmente */
+        width: auto; /* Largura automática */
+        padding: 0.5rem;
+        box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.15);
+    }
+
+    .sidebar-item {
+        font-size: 0.8rem; /* Reduz o tamanho da fonte */
+        padding: 0.2rem;
+    }
+
+    .sidebar-item i {
+        font-size: 1.3rem; /* Reduz o tamanho dos ícones */
+        margin-bottom: 0.3rem;
+    }
+
+    /* --- Seções de Conteúdo (Projetos e Habilidades) --- */
+    .main-content-grid {
+        grid-template-columns: 1fr; /* Altera para uma única coluna */
+        gap: 2rem; /* Reduz o espaçamento entre as seções */
+        margin: 2rem auto; /* Ajusta as margens */
+        padding: 0 1rem; /* Ajusta o padding lateral */
+    }
+
+    .destaques-tecnicos,
+    .projects-container {
+        padding: 1.5rem; /* Ajusta o padding interno dos cards */
+    }
+
+    .destaques-tecnicos h2,
+    .projects-container h2 {
+        text-align: center; /* Centraliza os títulos das seções */
+        margin-bottom: 1.5rem;
+        font-size: 1.6rem; /* Ajusta o tamanho dos títulos das seções */
+    }
+
+    .destaques-tecnicos li {
+        font-size: 1rem; /* Ajusta o tamanho da fonte das habilidades */
+        margin-bottom: 0.8rem;
+    }
+
+    .projects-highlight {
+        gap: 1rem; /* Reduz o espaçamento entre os cards de projetos relevantes */
+    }
+
+    .project-card {
+        padding: 1rem; /* Reduz o padding dos cards de projeto */
+    }
+
+    .project-card h3 {
+        font-size: 1.25rem; /* Ajusta o tamanho do título do projeto */
+    }
+
+    .project-card p {
+        font-size: 0.875rem; /* Ajusta o tamanho do texto do projeto */
+    }
+
+    .experience-card {
+        margin-bottom: 1.5rem; /* Ajusta o espaço entre os cards de experiência */
+    }
+
+    .timeline span {
+        font-size: 0.8rem; /* Ajusta o tamanho da fonte da linha do tempo */
+    }
+
+    /* --- Seção "Outros Projetos" --- */
+    .projects-content {
+        padding: 1.5rem 1rem; /* Ajusta o padding */
+    }
+
+    .projects-content h2 {
+        font-size: 1.6rem; /* Ajusta o tamanho do título "Outros Projetos" */
+        margin-bottom: 1.5rem;
+    }
+
+    .projects-content-container {
+        grid-template-columns: 1fr; /* Uma única coluna para projetos menores */
+        gap: 1.5rem; /* Espaçamento entre os projetos */
+    }
+
+    .project {
+        padding: 1rem; /* Reduz o padding do card de projeto */
+    }
+
+    .project h4 {
+        font-size: 1.15rem; /* Ajusta o tamanho do título do projeto */
+    }
+
+    .clickable-image {
+        height: 10rem; /* Reduz a altura das imagens dos projetos */
+    }
+
+    /* --- Caixa de Comentários (Pop-up) --- */
+    .comments-container {
+        width: 90%; /* Ajusta a largura para telas menores */
+        padding: 1rem;
+        max-height: 90vh; /* Aumenta a altura máxima para ocupar mais espaço */
+    }
+
+    .comments-container h4 {
+        font-size: 1.2rem; /* Ajusta o tamanho do título dos comentários */
+        margin-bottom: 0.8rem;
+    }
+
+    .comment-input-area {
+        flex-direction: column; /* Empilha o input e o botão */
+        gap: 0.8rem; /* Espaçamento entre eles */
+    }
+
+    .comment-input-area button {
+        width: 100%; /* Botão ocupa a largura total */
+    }
+
+    .comments-list li {
+        font-size: 0.875rem; /* Ajusta o tamanho do texto dos comentários */
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* --- Habilidades (Cards) --- */
+    .skill-category.card {
+        margin-bottom: 1.5rem; /* Ajusta o espaçamento entre os cards de habilidades */
+        box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.1); /* Sombra mais sutil */
+    }
+
+    .skill-category .card-header {
+        padding: 1rem; /* Ajusta o padding do cabeçalho do card de habilidade */
+    }
+
+    .skill-category h3 {
+        font-size: 1.3rem; /* Ajusta o tamanho do título da categoria de habilidade */
+    }
+
+    .skills-list .list-group-item {
+        font-size: 0.95rem; /* Ajusta o tamanho da fonte dos itens de habilidade */
+        padding: 0.6rem 1rem;
+    }
+
+    .skills-list .list-group-item i {
+        font-size: 1.1rem; /* Ajusta o tamanho do ícone de habilidade */
+    }
+
+    /* --- Footer --- */
+    footer {
+        padding: 1.5rem 1rem; /* Ajusta o padding do footer */
+        margin-top: 2rem; /* Ajusta a margem superior */
+    }
+
+    footer h2 {
+        font-size: 1.3rem; /* Ajusta o tamanho do título do footer */
+        margin-bottom: 0.5rem;
+    }
+
+    footer p {
+        font-size: 0.85rem; /* Ajusta o tamanho do texto do footer */
+        display: block; /* Cada parágrafo em uma nova linha no mobile */
+        margin-bottom: 0.3rem; /* Espaço entre os parágrafos */
+    }
 }

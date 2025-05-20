@@ -1,0 +1,699 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    margin: 0;
+    /* Sugestão: Use uma fonte padrão e, se quiser algo mais específico, importe do Google Fonts.
+       A sua escolha atual "sans-serif" é uma boa fallback. */
+    font-family: 'Montserrat', sans-serif; /* Exemplo: Adicione 'Montserrat' se importar */
+    background-color: #f0f0f0; /* Cor de fundo clara */
+    color: #333;
+    line-height: 1.6;
+    /* Sugestão: Adicione um 'scroll-behavior: smooth;' para rolagem suave ao clicar nos links internos. */
+    scroll-behavior: smooth;
+}
+
+/* Container Reusable Style */
+.container {
+    width: 90%;
+    max-width: 1200px; /* Largura máxima para telas maiores */
+    margin: 0 auto; /* Centraliza o contêiner */
+    padding: 0 1.25rem; /* Adiciona padding nas laterais */
+}
+
+/* Header Styling */
+header {
+    position: fixed; /* Fixa o elemento na janela de visualização */
+    top: 0; /* Alinha o topo do header ao topo da janela */
+    left: 0; /* Alinha a esquerda do header à esquerda da janela */
+    width: 100%; /* Faz com que o header ocupe toda a largura */
+    background-color: #fff; /* Fundo branco para o header */
+    z-index: 1000; /* Garante que o header fique acima de outros elementos */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* CORREÇÃO/MELHORIA: Aplicar flexbox ao contêiner dentro do header */
+header .container {
+    display: flex; /* Organiza logo, nav e hamburger lado a lado */
+    justify-content: space-between; /* Empurra logo para a esquerda e nav/hamburger para a direita */
+    align-items: center; /* Alinha itens verticalmente */
+    padding-top: 0.75rem; /* Espaço acima do header */
+    padding-bottom: 0.75rem; /* Espaço abaixo do header */
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #111;
+}
+
+nav ul {
+    list-style: none; /* Remove marcadores de lista */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Organiza os itens da navegação lado a lado */
+}
+
+nav ul li {
+    margin-left: 1.875rem; /* Espaço entre os itens do menu */
+}
+
+nav ul li a {
+    text-decoration: none; /* Remove sublinhado */
+    color: #555;
+    font-weight: 500;
+    transition: color 0.3s ease; /* Transição suave de cor ao passar o mouse */
+}
+
+nav ul li a:hover {
+    color: #007bff; /* Cor de destaque no hover */
+}
+
+/* Estilo para o botão do menu sanduíche - Escondido por padrão no desktop */
+.hamburger-menu {
+    display: none; /* Esconde o botão no desktop */
+    background: none;
+    border: none;
+    font-size: 1.8rem; /* Tamanho do ícone */
+    cursor: pointer;
+    color: #333; /* Cor do ícone */
+    padding: 0.5rem; /* Adiciona área clicável */
+    transition: color 0.3s ease;
+}
+
+.hamburger-menu:hover {
+    color: #007bff;
+}
+
+/* Hero Section Styling */
+.hero-section {
+    padding: 8.125rem 0 11rem 0; /* Ajuste o padding conforme necessário */
+    position: relative; /* Necessário para o posicionamento absoluto da imagem/forma */
+    overflow: hidden; /* Esconde qualquer transbordamento da forma abstrata */
+    /* Sugestão: Adicione um 'min-height' ou 'height' para garantir que a seção tenha um tamanho mínimo,
+       especialmente se o conteúdo for pouco. Por exemplo: */
+    min-height: 100vh; /* Para ocupar a altura total da viewport */
+    display: flex; /* Garante que o conteúdo fique centralizado verticalmente */
+    align-items: center; /* Centraliza itens verticalmente */
+    justify-content: center; /* Centraliza itens horizontalmente */
+}
+
+.hero-section .container {
+    display: flex; /* Organiza conteúdo e imagem lado a lado */
+    align-items: center; /* Alinha itens verticalmente */
+    gap: 2.5rem; /* Espaço entre o conteúdo e a imagem */
+    /* Sugestão: Adicione 'flex-wrap: wrap;' para que os itens quebrem a linha em telas menores,
+       antes mesmo da media query, melhorando a adaptabilidade. */
+    flex-wrap: wrap;
+    justify-content: center; /* Centraliza conteúdo e imagem quando quebram a linha */
+}
+
+.hero-content {
+    flex: 1; /* Permite que o conteúdo ocupe o espaço disponível */
+    max-width: 600px; /* Limita a largura do conteúdo */
+    z-index: 1; /* Garante que o conteúdo fique acima da forma abstrata */
+    /* Sugestão: Adicione 'text-align: center;' para centralizar o texto no mobile,
+       pois na media query só centraliza o container, não o texto em si. */
+    text-align: center;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin: 0 0 0.625rem 0;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem; /* Ajuste o tamanho conforme necessário */
+    margin: 0 0 1.25rem 0;
+    line-height: 1.1;
+}
+
+/* Sugestão: Como o botão "Contato" no HTML foi alterado para um <a>,
+   este seletor 'contact-button' precisa ser ajustado para estilizar um link. */
+.contact-button {
+    display: inline-block;
+    background-color: #007bff; /* Cor azul do botão */
+    color: #fff; /* Cor do texto do link */
+    padding: 0.75rem 1.5625rem;
+    border: none; /* Links não têm 'border' por padrão, mas é bom para consistência */
+    border-radius: 5px;
+    font-size: 1.125rem;
+    cursor: pointer; /* Adiciona cursor de ponteiro */
+    text-decoration: none; /* Remove sublinhado do link */
+    transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: #0056b3; /* Azul mais escuro no hover */
+}
+
+/* Sugestão: Remova o '.contact-button a' pois o próprio .contact-button já é o link agora. */
+/* .contact-button a {
+    color: #fff;
+    text-decoration: none;
+} */
+
+.social-links {
+    margin-top: 1.875rem; /* Espaço acima dos ícones sociais */
+    font-size: 1.5rem; /* Tamanho dos ícones sociais */
+    /* Sugestão: Use flexbox para centralizar os ícones sociais facilmente */
+    display: flex;
+    justify-content: center;
+    gap: 0.9375rem; /* Use gap para espaçamento entre os links */
+}
+
+/* Sugestão: Remova 'margin-right' individual e use 'gap' no flexbox pai. */
+.social-links a {
+    color: #555; /* Cor dos ícones */
+    /* margin-right: 0.9375rem; */ /* Remova esta linha */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #007bff; /* Cor de destaque no hover */
+}
+
+.hero-image {
+    flex: 1; /* Permite que o contêiner da imagem ocupe o espaço disponível */
+    display: flex;
+    justify-content: center; /* Centraliza o contêiner da imagem */
+    align-items: center;
+    position: relative; /* Necessário para o posicionamento da forma */
+}
+
+.image-container {
+    position: relative; /* Necessário para posicionar a forma em relação à imagem */
+    width: 25rem; /* Ajuste o tamanho conforme necessário */
+    height: 25rem; /* Ajuste o tamanho conforme necessário */
+}
+
+.image-container img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem cubra o contêiner */
+    /* border-radius: 50%; /* Descomente se quiser a imagem redonda */
+    z-index: 2; /* Garante que a imagem fique acima da forma */
+    position: relative; /* Posiciona a imagem */
+}
+
+.abstract-shape {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 31.25rem; /* Ajuste o tamanho da forma */
+    height: 31.25rem; /* Ajuste o tamanho da forma */
+    background-color: #007bff; /* Cor azul para a forma */
+    border-radius: 40% 60% 70% 30% / 60% 30% 70% 40%;
+    transform: translate(-50%, -50%); /* Centraliza a forma */
+    z-index: 0; /* Posiciona atrás da imagem */
+    filter: blur(3.125rem); /* Adiciona um desfoque nas bordas */
+}
+
+/* Floating Sidebar Styling */
+.floating-sidebar {
+    position: fixed; /* Mantém fixo na viewport */
+    right: 0.75rem; /* Distância da borda direita */
+    top: 50%; /* Começa no centro vertical */
+    transform: translateY(-50%); /* Centraliza verticalmente */
+    display: flex;
+    flex-direction: column; /* Empilha os itens verticalmente */
+    gap: 0.125rem; /* Espaço entre os itens */
+    background-color: #fff;
+    padding: 0.25rem;
+    border-radius: 8px;
+    box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
+    z-index: 10; /* Garante que fique por cima de outros elementos */
+}
+
+.sidebar-item {
+    display: flex;
+    flex-direction: column; /* Empilha ícone e texto */
+    align-items: center; /* Centraliza itens horizontalmente */
+    font-size: 0.875rem;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 0.3125rem; /* Adiciona padding para aumentar a área clicável */
+    border-radius: 4px; /* Bordas arredondadas */
+}
+
+.sidebar-item i {
+    font-size: 1.5rem; /* Tamanho dos ícones */
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-item:hover {
+    color: #007bff; /* Cor de destaque */
+}
+
+/* Opcional: Estilos para quando um item é clicado (estado ativo) */
+.sidebar-item.liked i,
+.sidebar-item.liked span {
+    color: #007bff; /* Exemplo: Cor azul para likes clicados */
+    font-weight: bold; /* Destaca o texto */
+}
+
+/* Você pode adicionar um estilo para dislikes clicados também, mas sem mostrar a contagem */
+.sidebar-item.disliked i,
+.sidebar-item.disliked span {
+    color: #ff0000; /* Exemplo: Cor vermelha para dislikes clicados */
+    font-weight: bold; /* Destaca o texto */
+}
+
+/* Comentários - Ajuste no posicionamento do modal */
+.comments-container {
+    position: fixed;
+    top: 50%;
+    left: 50%; /* Posição inicial, vamos ajustar com JS */
+    transform: translate(-50%, -50%); /* Centraliza inicialmente */
+    width: 25rem; /* Largura da caixa de comentários */
+    max-height: 80vh; /* Altura máxima baseada na viewport */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.2);
+    z-index: 1001; /* Acima da sidebar */
+    display: none; /* Inicialmente escondido */
+    flex-direction: column;
+    padding: 1.25rem;
+    overflow-y: auto; /* Adiciona scroll se os comentários excederem a altura máxima */
+}
+
+.comments-container h4 {
+    margin-top: 0;
+    margin-bottom: 0.9375rem; /* Espaço abaixo do título */
+    text-align: center;
+    color: #333;
+}
+
+.comment-input-area {
+    display: flex;
+    margin-bottom: 0.9375rem; /* Espaço abaixo da área de input */
+    gap: 0.625rem; /* Espaço entre o campo de texto e o botão */
+}
+
+.comment-input-area input[type="text"] {
+    flex-grow: 1; /* O campo de texto ocupa o máximo de espaço */
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.comment-input-area button {
+    padding: 0.5rem 0.9375rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+}
+
+.comment-input-area button:hover {
+    background-color: #0056b3;
+}
+
+.comments-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comments-list li {
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #eee;
+    padding: 0.625rem; /* Espaço interno */
+    margin-bottom: 0.625rem; /* Espaço entre os comentários */
+    border-radius: 4px;
+    font-size: 0.9375rem; /* Tamanho do texto */
+    word-wrap: break-word; /* Quebra palavras longas */
+}
+
+.comments-list li:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+/* Estilos gerais para seções (Melhoria: Adicionado padding superior para compensar o header fixo) */
+section {
+    padding: 1.5rem 6.25rem; /* Adiciona padding vertical às seções */
+    /* Sugestão: Adicione um 'padding-top' para compensar o header fixo,
+       garantindo que o conteúdo não fique escondido abaixo dele ao navegar por âncoras. */
+    padding-top: calc(1.5rem + 4.5rem); /* Exemplo: 1.5rem de padding + ~4.5rem da altura do header */
+}
+
+/* Estilos para o corpo da seção "Sobre" */
+.about-me p {
+    font-size: 1.25rem;
+    text-align: center; /* Sugestão: Centraliza o texto "Sobre Mim" */
+}
+
+/* Estilos para títulos */
+h1 {
+    font-size: 2.5rem; /* Ajusta o tamanho do título principal no mobile */
+}
+
+h2 {
+    font-size: 1.875rem; /* Aumentei um pouco o tamanho dos títulos de seção */
+    text-align: center; /* Centraliza os títulos das seções */
+    color: #111;
+    margin-bottom: 1.25rem; /* Espaço abaixo do título */
+}
+
+h3 {
+    font-size: 1.375rem; /* Aumentei um pouco o tamanho dos títulos de seção */
+    margin-bottom: 0.9375rem; /* Ajustei um pouco */
+    margin-top: 0; /* Removi o margin-top que estava no seu código para h3 */
+    color: #111;
+}
+
+h4 {
+    font-size: 1.125rem; /* Aumentei um pouco o tamanho dos títulos de seção */
+    margin-bottom: 0.9375rem; /* Ajustei um pouco */
+    color: #111;
+}
+
+p { /* Estilo geral para parágrafos, ajuste se necessário */
+    font-size: 1rem; /* Tamanho do texto */
+    margin-bottom: 0.5rem; /* Espaço abaixo do parágrafo */
+}
+
+/* Contêineres de Grid para Projetos e Habilidades */
+.projects-container,
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr)); /* Desktop minmax */
+    gap: 1.25rem; /* Desktop gap */
+    margin-top: 1.875rem;
+}
+
+/* Estilos para os Itens do Grid (Cards) */
+.project-card,
+.skill-category,
+.experience-card { /* Sugestão: Agrupe estilos comuns para cards para reduzir redundância */
+    padding: 1.25rem; /* Padding para desktop */
+    background-color: #007bffb4; /* Cor azul com transparência */
+    border-radius: 15px;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #fff; /* Cor do texto padrão para cards */
+}
+
+/* Estilo para títulos dentro dos cards de projeto */
+.project-card h3,
+.skill-category h3,
+.experience-card h3 { /* Aplicar a h3 dentro de todos os cards */
+    color: #fff;
+    text-align: center; /* Centraliza o título nos cards */
+}
+
+.project-card p,
+.skill-category p {
+    font-size: 0.9375rem; /* Aumentei um pouco o tamanho do texto */
+    margin-bottom: 0.625rem; /* Espaço abaixo do parágrafo */
+    color: #fff; /* Cor do texto */
+}
+
+.project-card:hover,
+.skill-category:hover,
+.project:hover { /* Agrupe os :hover para os cards */
+    transform: scale(1.01); /* Aumenta o tamanho ao passar o mouse */
+    box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.3); /* Sombra mais intensa no hover */
+}
+
+.experience-card {
+    margin-bottom: 1.875rem; /* Espaço entre os cards de experiência */
+    /* Sugestão: Se quiser que o título "Destaques:" dentro do experience-card não seja centralizado,
+       você precisará ser mais específico. Por exemplo:
+       .experience-card .highlights h4 { text-align: left; }
+       Mas como H3 e H4 já são mais específicos para cards, isso está ok. */
+}
+
+.timeline span.company { /* Mais específico para o nome da empresa */
+    font-style: italic;
+    font-size: 0.875rem; /* Aumentei um pouco o tamanho */
+    display: block; /* Para que fique em uma nova linha */
+    margin-bottom: 0.3125rem; /* Espaço abaixo do span */
+}
+
+/* Sugestão: Removido .skill-category:hover pois já está agrupado acima. */
+/* .skill-category:hover {
+    transform: scale(1.01);
+    box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.3);
+} */
+
+/* Sugestão: Removido .skill-category h3 pois já está agrupado acima. */
+/* .skill-category h3 {
+    color: #fff;
+    text-align: center;
+} */
+
+/* Sugestão: Removido .skill-category p pois já está agrupado acima. */
+/* .skill-category p {
+    font-size: 0.9375rem;
+    margin-bottom: 0.625rem;
+    color: #fff;
+} */
+
+
+/* Sugestão: Esta regra para .projects-container está duplicada. A primeira já define o grid.
+   Esta segunda pode ser removida. */
+/* .projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+    gap: 1.25rem;
+} */
+
+.project {
+    background: #007bffb4;
+    border-radius: 10px; /* Sugestão: Consistência de border-radius, antes era 15px nos outros cards. */
+    padding: 1.25rem;
+    box-shadow: 0 0.125rem 0.3125rem rgba(0,0,0,0.1); /* Adicionei sombra padrão */
+    /* transition: transform 0.3s ease, box-shadow 0.3s ease; -- Já agrupado no .project-card:hover */
+}
+
+/* Sugestão: Removido .project:hover pois já está agrupado acima. */
+/* .project:hover {
+    transform: translateY(-0.3125rem);
+    box-shadow: 0 0.3125rem 0.625rem rgba(0,0,0,0.2);
+} */
+
+.project h4 {
+    color: #fff;
+    margin-bottom: 0.625rem; /* Ajustei um pouco */
+    font-size: 1.25rem; /* Aumentei um pouco o tamanho do título do projeto */
+    text-align: center; /* Centraliza o título */
+}
+
+.project-image {
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 0.9375rem; /* Adiciona espaço abaixo da imagem */
+}
+
+/* Sugestão: O 'clickable-image' é uma classe no <img>.
+   Como no HTML alteramos para envolver a <img> com <a>,
+   podemos estilizar diretamente o <a> ou a <img> dentro do <a>. */
+.project-image a { /* Estiliza o link que envolve a imagem */
+    display: block; /* Para que o link ocupe todo o espaço da imagem */
+    height: 12.5rem; /* Altura fixa para o contêiner do link */
+    overflow: hidden; /* Garante que a imagem não transborde ao fazer scale */
+    border-radius: 8px; /* Mantém o border-radius do contêiner da imagem */
+}
+
+.project-image img { /* Estiliza a imagem dentro do link */
+    display: block; /* Garante que a imagem se comporte como bloco */
+    width: 100%;
+    height: 100%; /* Ocupa 100% da altura do seu pai (o link) */
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+    transition: transform 0.3s ease;
+    /* cursor: pointer; -- O cursor já será de ponteiro por ser um link */
+}
+
+.project-image img:hover { /* Hover na imagem (que está dentro do link) */
+    transform: scale(1.05); /* Aumentei um pouco o zoom */
+}
+
+/* Footer Styling */
+footer { /* Usei apenas footer como seletor */
+    background-color: #f8f8f8; /* Cor de fundo leve para o footer */
+    color: #555; /* Cor do texto */
+    padding: 1.25rem 0; /* Ajuste o padding */
+    text-align: center;
+    margin-top: 2.5rem; /* Espaço acima do footer */
+}
+
+footer h2 {
+    font-size: 1.5rem; /* Ajustei o tamanho do título no footer */
+    margin-bottom: 0.625rem;
+    cursor: default; /* Removi o cursor pointer */
+    color: #111;
+}
+
+footer p {
+    color: #555; /* Cor do texto do parágrafo no footer */
+    margin: 0 1rem;
+    text-decoration: none; /* Sugestão: Remover se não houver link no parágrafo */
+    font-size: 0.9rem;
+    display: inline-block; /* Para que os parágrafos fiquem na mesma linha se houver mais de um */
+}
+
+footer p:hover {
+    text-decoration: underline; /* Sugestão: Remova se não houver link no parágrafo */
+    color: #111;
+}
+
+/* Sugestão: Adicione uma classe 'sr-only' para elementos que devem ser lidos por leitores de tela,
+   mas escondidos visualmente. */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* ========== RESPONSIVIDADE MOBILE ========== */
+@media (max-width: 768px) {
+    .hero-section .container {
+        flex-direction: column; /* Empilha conteúdo e imagem verticalmente */
+        text-align: center; /* Centraliza o texto do conteúdo */
+        gap: 1.25rem; /* Reduz o espaço entre eles */
+    }
+
+    .hero-content {
+        max-width: 100%;
+        /* text-align: center; -- Já definido acima para desktop, se aplicar */
+    }
+
+    .social-links {
+        justify-content: center;
+        margin-top: 1.25rem; /* Ajusta o espaço */
+    }
+
+    .hero-image {
+        order: -1; /* Coloca a imagem acima do conteúdo no mobile */
+        margin-bottom: 1.25rem; /* Ajusta o espaço */
+    }
+
+    .image-container,
+    .abstract-shape {
+        width: 15.625rem; /* Ajusta o tamanho para telas menores */
+        height: 15.625rem; /* Ajusta o tamanho para telas menores */
+    }
+
+    .abstract-shape {
+        filter: blur(1.25rem); /* Ajusta o desfoque */
+    }
+
+    nav {
+        /* Estilos para o menu mobile (inicialmente escondido) */
+        position: fixed; /* Posição fixa na viewport */
+        top: 0; /* Começa no topo */
+        left: -100%; /* Esconde a navegação para a esquerda */
+        width: 70%; /* Largura do menu (ajuste conforme necessário) */
+        height: 100vh; /* Ocupa a altura total da viewport */
+        background-color: #fff; /* Fundo branco para o menu */
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Sombra na lateral */
+        transition: left 0.3s ease; /* Transição suave para abrir/fechar */
+        z-index: 999; /* Garante que fique acima do conteúdo, mas abaixo da sidebar flutuante */
+        padding-top: 4rem; /* Espaço no topo para não ficar colado no header */
+    }
+
+    nav ul {
+        flex-direction: column; /* Empilha os itens do menu verticalmente */
+        align-items: flex-start; /* Alinha os itens à esquerda */
+        margin-top: 0; /* Remove o margin-top */
+        padding: 1rem; /* Adiciona padding ao redor do menu */
+    }
+
+    nav ul li {
+        margin: 0.5rem 0; /* Espaço entre os itens do menu empilhado */
+        display: block; /* Garante que os itens ocupem toda a largura */
+        width: 100%; /* Faz com que os itens ocupem toda a largura */
+    }
+
+    header .container {
+        flex-direction: row; /* Empilha logo e nav no mobile */
+        justify-content: space-between; /* Espaço entre logo e nav */
+        align-items: center; /* Alinha itens verticalmente */
+        gap: 0; /* Remove o espaço entre logo e nav */
+    }
+
+    /* Mostra o botão do menu sanduíche no mobile */
+    .hamburger-menu {
+        display: block; /* Mostra o botão */
+        position: relative; /* Para garantir que o z-index funcione se necessário */
+        z-index: 1001; /* Acima da navegação móvel */
+    }
+
+    /* Mostra a navegação quando a classe 'nav-open' é adicionada ao body */
+    body.nav-open nav {
+        left: 0; /* Move a navegação para a posição visível */
+    }
+
+    /* Impede o scroll do conteúdo principal quando o menu está aberto */
+    body.nav-open {
+        overflow: hidden;
+    }
+
+    .floating-sidebar {
+        right: 0.625rem;
+        gap: 0.5rem; /* Reduz o espaço */
+        padding: 0.625rem 0.5rem; /* Ajusta o padding */
+    }
+
+    .sidebar-item {
+        font-size: 0.625rem; /* Reduz o tamanho da fonte */
+    }
+
+    .sidebar-item i {
+        font-size: 1rem; /* Reduz o tamanho dos ícones */
+        margin-bottom: 0.1875rem; /* Ajusta o espaço */
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .about-me p {
+        font-size: 1rem; /* Ajusta o tamanho do parágrafo no mobile */
+    }
+
+    .projects-container,
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); /* <-- Ajuste o minmax para mobile */
+    }
+
+    .project h4 {
+        font-size: 1.125rem; /* Ajusta o tamanho do título do projeto */
+    }
+
+    .project-image a { /* Ajustar o tamanho do link da imagem também */
+        height: 9.375rem; /* Reduz a altura das imagens dos projetos */
+    }
+
+    /* --- Melhoria na Responsividade das Seções --- */
+    section {
+        padding: 1.5rem 3rem; /* Reduz o padding horizontal nas seções para mobile */
+        /* Sugestão: Ajustar o padding-top para o mobile também, considerando a altura do header. */
+        padding-top: calc(1.5rem + 4.5rem);
+    }
+}

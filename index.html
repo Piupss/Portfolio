@@ -1,94 +1,131 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Portfólio de Lucas Gabriel BS - Desenvolvedor Front-End e Técnico em TI">
-        <meta name="keywords" content="portfólio, desenvolvedor front-end, HTML, CSS, JavaScript, TI">
-        <title>Lucas Gabriel BS | Desenvolvedor Front-End & Técnico em TI</title>
-        <link rel="stylesheet" href="styles.css">
-        <script src="script.js" defer></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio de Lucas Gabriel BS - Desenvolvedor Front-End e Técnico em TI">
+    <meta name="keywords" content="portfólio, desenvolvedor front-end, HTML, CSS, JavaScript, TI">
+    <title>Lucas Gabriel BS | Desenvolvedor Front-End & Técnico em TI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
 
-    <body>
-        <header class="header">
-            <nav class="navbar">
-               <div class="left">
-                    <a href="#home" class="nav-link"><strong>Home</strong></a>
-                </div>
-                <div class="right">
-                    <a href="#sobre" class="nav-link"><strong>Sobre Mim</strong></a>
-                    <a href="#projetos" class="nav-link"><strong>Projetos</strong></a>
-                    <a href="#experiencia" class="nav-link"><strong>Experiência</strong></a>
-                    <a href="#habilidades" class="nav-link"><strong>Habilidades</strong></a>
-                </div>
-        </header>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Lucas</div>
+            <nav>
+                <ul>
+                    <li><a href="#home-section">Home</a></li>
+                    <li><a href="#about-me-section">Sobre</a></li>
+                    <li><a href="#projects-section">Projetos</a></li>
+                    <li><a href="#experience-section">Experiências</a></li>
+                    <li><a href="#skills-section">Habilidades</a></li>
+                </ul>
+            </nav>
+                <button class="hamburger-menu" aria-label="Abrir Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+        </div>
+    </header>
 
-        <main class="main-content">
-            <section id="home" class="hero-section">
-                <div class="hero-content">
-                    <h1>Olá, Eu sou Lucas Gabriel BS</h1>
-                    <p>Desenvolvedor Web & Técnico em TI</p>
+    <section id="home-section" class="hero-section" aria-labelledby="home">
+        <div class="container">
+            <div class="hero-content">
+                <p>Olá,</p>
+                <h1>Sou o Lucas<br>Web Designer</h1>
+                <button class="contact-button"><a href="#contact">Contato</a></button>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/lucas-s-43a47211a/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com/lucas_gbs_/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/Piupss" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-container">
+                       <img src="Img/Design_sem_nome-removebg-preview.png" alt="Lucas">
+                    <div class="abstract-shape"></div>
                 </div>
-                <div class="hero-image">
-                    <img src="Img/Design_sem_nome-removebg-preview.png" alt="Lucas Gabriel BS" class="profile-image">
-                </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <section id="sobre" class="about-me" aria-labelledby="sobre-titulo">
-                <article>
-                    <p>Profissional em transição para <strong>Tecnologia da Informação</strong>, com experiência prévia em <strong>logística industrial</strong> e conhecimentos sólidos em <strong>desenvolvimento web</strong> (HTML, CSS e JavaScript), além de base técnica em hardware e sistemas. Combino habilidades operacionais e analíticas com paixão por tecnologia, buscando oportunidades para atuar na área de TI.</p>
-                    
-                <h2>Destaques Técnicos:</h2>
-            <ul class="destaques">
-                <li><strong>Front-End:</strong> Criação de interfaces responsivas e dinâmicas com HTML, CSS e JavaScript (projeto em Vanilla como portfólio e blog pessoal, e clone do Spotify em React usando JavaScript).</li>                
-                <li><strong>Lógica de Programação:</strong> Habilidade em resolver problemas com JavaScript e noções de Java para back-end, além de estudos em C# para Unity (desenvolvimento de jogos).</li>                  
-                <li><strong>Expertise em Sistemas:</strong> Formatação, customização avançada (root/jailbreak) e troubleshooting em Windows/Linux, além de montagem e manutenção de hardware.</li>                   
-                <li><strong>Perfil Autodidata:</strong> Histórico de aprendizado contínuo (cursos técnicos, projetos pessoais e imersão em tecnologias emergentes).</li>
-            </ul>
+    <div class="floating-sidebar">
+        <div class="sidebar-item" id="like-button">
+            <i class="fas fa-thumbs-up"></i>
+            <span id="like-count">0</span>
+        </div>
+        <div class="sidebar-item" id="dislike-button">
+            <i class="fas fa-thumbs-down"></i>
+            <span id="dislike-count">Dislike</span>
+        </div>
+        <div class="sidebar-item" id="comment-section">
+            <i class="fas fa-comment"></i>
+            <span id="comment-count">0</span>
+        </div>
+    </div>
 
-                <h2>Projetos Relevantes:</h2>
-                <div class="projects-highlight">
+    <section id="about-me-section" class="about-me" aria-labelledby="about-me-title">
+        <article>
+            <p>Profissional em transição para <strong>Tecnologia da Informação</strong>, com experiência prévia em <strong>logística industrial</strong> e conhecimentos sólidos em <strong>desenvolvimento web</strong> (HTML, CSS e JavaScript), além de base técnica em hardware e sistemas. Combino habilidades operacionais e analíticas com paixão por tecnologia, buscando oportunidades para atuar na área de TI.</p>
+        </article>
+    </section>
+
+    <main class="main-content-grid"> 
+        <section class="destaques-tecnicos" aria-labelledby="destaques-titulo">
+            <h2>Destaques Técnicos:</h2>
+            <article>
+                <ul class="destaques">
+                    <li><strong>Front-End:</strong> Criação de interfaces responsivas e dinâmicas com HTML, CSS e JavaScript (projeto em Vanilla como portfólio e blog pessoal, e clone do Spotify em React usando JavaScript).</li>                     
+                    <li><strong>Lógica de Programação:</strong> Habilidade em resolver problemas com JavaScript e noções de Java para back-end, além de estudos em C# para Unity (desenvolvimento de jogos).</li>                       
+                    <li><strong>Expertise em Sistemas:</strong> Formatação, customização avançada (root/jailbreak) e troubleshooting em Windows/Linux, além de montagem e manutenção de hardware.</li>                      
+                    <li><strong>Perfil Autodidata:</strong> Histórico de aprendizado contínuo (cursos técnicos, projetos pessoais e imersão em tecnologias emergentes).</li>
+                </ul>
+            </article>
+        </section>
+        
+        <section id="projects-section" class="projects-container" aria-labelledby="projects-title">
+            <h2>Projetos Relevantes:</h2> <div class="projects-highlight">
                     <article class="project-card">
                         <h3>📖 Portfólio Pessoal</h3>
-                        <ul>
-                            <li>Site interativo desenvolvido com HTML, CSS e JavaScript</li>
-                            <li>Apresenta projetos, habilidades e trajetória profissional</li>
-                            <li>Design responsivo e otimizado para SEO</li>
-                        </ul>
+                        <p>
+                            Site interativo desenvolvido com HTML, CSS e JavaScript<br>
+                            Apresenta projetos, habilidades e trajetória profissional<br>
+                            Design responsivo e otimizado para SEO<br>
+                        </p>
                     </article>
 
                     <article class="project-card">
                         <h3>🎶 Clone do Spotify</h3>
-                        <ul>
-                            <li>Recriação da interface do Spotify com funcionalidades básicas</li>
-                            <li>Desenvolvido com HTML, CSS e JavaScript em React e Node.js</li>
-                            <li>Integração com API</li>
-                        </ul>
+                        <p>
+                            Recriação da interface do Spotify com funcionalidades básicas<br>
+                            Desenvolvido com HTML, CSS e JavaScript em React e Node.js<br>
+                            Integração com API<br>
+                        </p>
                     </article>
 
                     <article class="project-card">
                         <h3>🤖 Blog sobre IA (em desenvolvimento)</h3>
-                        <ul>
-                            <li>Plataforma com artigos e notícias sobre Inteligência Artificial</li>
-                            <li>Desenvolvido com Vanilla e transferindo para React e Node.js</li>
-                            <li>Foco em SEO e acessibilidade</li>
-                        </ul>
+                        <p>
+                            Plataforma com artigos e notícias sobre Inteligência Artificial<br>
+                            Desenvolvido com Vanilla e transferindo para React e Node.js<br>
+                            Foco em SEO e acessibilidade<br>
+                        </p>
                     </article>
 
                     <article class="project-card">
                         <h3>🕹️ Jogo em Unity</h3>
-                        <ul>
-                            <li>Protótipo de jogo 2D desenvolvido em C#</li>
-                            <li>Mecânicas customizadas e design de personagens</li>
-                        </ul>
+                        <p>
+                            Protótipo de jogo 2D desenvolvido em C#<br>
+                            Mecânicas customizadas e design de personagens<br>
+                        </p>
                     </article>
                 </div>
-            
-<h2 id="experiencia-titulo">Experiência Profissional</h2>
+        </section>
+    </main> <section id="experience-section" class="experience-container" aria-labelledby="experience-title">             
+<h2>Experiência Profissional</h2>
     <div class="timeline">
-        <!-- Experiência 1 -->
         <article class="experience-card">
             <h3>Almoxarife Técnico</h3>
             <div class="experience-details">
@@ -106,7 +143,6 @@
             </div>
         </article>
 
-        <!-- Experiência 2 -->
         <article class="experience-card">
             <h3>Vendas Internacionais</h3>
             <div class="experience-details">
@@ -122,7 +158,6 @@
             </div>
         </article>
 
-        <!-- Experiência 3 -->
         <article class="experience-card">
             <h3>Auxiliar de Logística</h3>
             <div class="experience-details">
@@ -138,7 +173,6 @@
             </div>
         </article>
 
-        <!-- Experiência 4 -->
         <article class="experience-card">
             <h3>Jovem Aprendiz em Qualidade</h3>
             <div class="experience-details">
@@ -154,85 +188,108 @@
             </div>
         </article>
     </div>
-            </article>
-        </section>
+    </article>
+</section>
 
-        <section id="habilidades" class="skills-section" aria-labelledby="habilidades-titulo">
-            <h2 id="habilidades-titulo">Habilidades</h2>
-            <div class="skills-grid">
-                <article class="skill-category">
+ <section id="skills-section" class="skills-container container" aria-labelledby="skills-title">
+    <h2 id="skills-title" class="text-center mb-5">Habilidades</h2>
+    <div class="row justify-content-center">
+        <article class="col-md-4 mb-4">
+            <div class="skill-category card shadow-sm">
+                <div class="card-header text-center">
                     <h3>Linguagens</h3>
-                    <ul class="skills-list">
-                        <li>HTML</li>
-                        <li>CSS</li>
-                        <li>JavaScript</li>
-                        <li>C# Básico</li>
-                        <li>Java Basico</li>
-                        <li>Python Básico</li>
-                    </ul>
-                </article>
-
-                <article class="skill-category">
-                    <h3>Frameworks & Bibliotecas</h3>
-                    <ul class="skills-list">
-                        <li>React</li>
-                        <li>Node.js</li>
-                        <li>Express</li>
-                    </ul>
-                </article>
-
-                <article class="skill-category">
-                    <h3>Ferramentas & Plataformas</h3>
-                    <ul class="skills-list">
-                        <li>Git & GitHub</li>
-                        <li>Unity</li>
-                        <li>VS Code</li>
-                    </ul>
-                </article>
+                </div>
+                <ul class="list-group list-group-flush skills-list">
+                    <li class="list-group-item"><i class="fab fa-html5 fa-fw me-2"></i> HTML</li>
+                    <li class="list-group-item"><i class="fab fa-css3-alt fa-fw me-2"></i> CSS</li>
+                    <li class="list-group-item"><i class="fab fa-js-square fa-fw me-2"></i> JavaScript</li>
+                    <li class="list-group-item"><i class="fas fa-code fa-fw me-2"></i> C# Básico</li>
+                    <li class="list-group-item"><i class="fab fa-java fa-fw me-2"></i> Java Básico</li>
+                    <li class="list-group-item"><i class="fab fa-python fa-fw me-2"></i> Python Básico</li>
+                </ul>
             </div>
-        </section>
+        </article>
 
-        <section id="projetos" class="projects-section" aria-labelledby="projetos-titulo">
-            <h2 id="projetos-titulo">Projetos</h2>
-            
-            <div class="projects-container">
-                <!-- Projeto 1 -->
+        <article class="col-md-4 mb-4">
+            <div class="skill-category card shadow-sm">
+                <div class="card-header text-center">
+                    <h3>Frameworks & Bibliotecas</h3>
+                </div>
+                <ul class="list-group list-group-flush skills-list">
+                    <li class="list-group-item"><i class="fab fa-react fa-fw me-2"></i> React</li>
+                    <li class="list-group-item"><i class="fab fa-node-js fa-fw me-2"></i> Node.js</li>
+                    <li class="list-group-item"><i class="fas fa-terminal fa-fw me-2"></i> Express</li>
+                </ul>
+            </div>
+        </article>
+
+        <article class="col-md-4 mb-4">
+            <div class="skill-category card shadow-sm">
+                <div class="card-header text-center">
+                    <h3>Ferramentas & Plataformas</h3>
+                </div>
+                <ul class="list-group list-group-flush skills-list">
+                    <li class="list-group-item"><i class="fab fa-git-alt fa-fw me-2"></i> Git & GitHub</li>
+                    <li class="list-group-item"><i class="fab fa-unity fa-fw me-2"></i> Unity</li>
+                    <li class="list-group-item"><i class="fas fa-laptop-code fa-fw me-2"></i> VS Code</li>
+                </ul>
+            </div>
+        </article>
+    </div>
+</section>
+
+        <section class="projects-content" aria-labelledby="projects-content-title">
+            <h2>Outros Projetos</h2>
+            <div class="projects-content-container">
                 <div class="project">
                     <h4>Meu Primeiro Site: PiupsAI</h4>
                     <div class="project-image">
                         <img src="Img/Web Page PiupsAI.png" 
                              alt="Página inicial do PiupsAI" 
-                             onclick="window.open('https://piupsai.com.br', '_blank')"
+                             data-url="https://piupsai.com.br/"
+                             target="_blank"
                              class="clickable-image">
                     </div>
                 </div>
                 
-                <!-- Projeto 2 -->
                 <div class="project">
                     <h4>Replica do Spotify</h4>
                     <div class="project-image">
                         <img src="Img/spotify.webp" 
                              alt="Página inicial do Spotify"
-                             onclick="window.open('URL_DO_SEGUNDO_SITE', '_blank')"
+                             data-url="https://lucasgabrielbs.github.io/Spotify-Clone/"
+                             target="_blank"
                              class="clickable-image">
                     </div>
                 </div>
                 
-                <!-- Projeto 3 -->
                 <div class="project">
                     <h4>Meu Primeiro jogo</h4>
                     <div class="project-image">
                         <img src="Img/jogo.jpg" 
                              alt="Protótipo de jogo 2D em Unity"
-                             onclick="window.open('URL_DO_TERCEIRO_SITE', '_blank')"
+                             data-url="https://lucasgabrielbs.github.io/Unity-Game/"
+                             target="_blank"
                              class="clickable-image">
                     </div>
                 </div>
             </div>
         </section>
+
+    <div class="comments-container" id="comments-box">
+        <h4>Comentários</h4>
+    <div class="comment-input-area">
+        <input type="text" id="new-comment-input" placeholder="Adicione um comentário...">
+        <button id="add-comment-button">Enviar</button>
+    </div>
+        <ul class="comments-list" id="comments-list">
+        </ul>
+    </div>
+
+</body>
         
         <footer class="footer" aria-labelledby="contact-title">
-            <h2 class="contact-title">Informações de Contato</h2>
+            <h2 id="contact" class="contact-title">Informações de Contato</h2>
                 <div class="contact-info">
                     <p>Lucas Gabriel BS</p>
                     <p>Email: lucasgabriel.bs@gmail.com</p>
