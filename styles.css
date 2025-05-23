@@ -179,6 +179,22 @@ footer p:hover {
     line-height: 1.1;
 }
 
+.contact-info {
+    display: none; /* Isso é o que oculta inicialmente */
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    padding: 0;
+}
+
+.contact-info.show {
+    display: block; /* Ou flex, dependendo de como você quer o layout interno */
+    max-height: 200px; /* Um valor alto o suficiente para caber o conteúdo */
+    opacity: 1;
+    padding: 10px 0; /* Adicione padding de volta se precisar */
+}
+
 .contact-button {
     display: inline-block;
     background-color: #007bff; /* Cor azul do botão */
@@ -525,6 +541,92 @@ footer p:hover {
     transform: scale(1.05); /* Aumentei um pouco o zoom */
 }
 
+.comments-list {
+    list-style: none; /* Remove marcadores de lista */
+    padding: 0;
+}
+
+.comments-list li {
+    background-color: #f0f0f0; /* Cor de fundo para cada comentário */
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 8px;
+    display: flex; /* Para alinhar o texto e os botões */
+    justify-content: space-between; /* Espaçamento entre texto e botões */
+    align-items: center;
+    word-wrap: break-word; /* Quebra palavras longas */
+}
+
+.comment-text {
+    flex-grow: 1; /* Ocupa o espaço disponível */
+    margin-right: 10px; /* Espaço entre o texto e os botões */
+}
+
+.comment-actions {
+    display: flex;
+    gap: 5px; /* Espaçamento entre os botões */
+}
+
+.comment-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9em;
+    color: #666;
+    padding: 5px;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+}
+
+.comment-actions button:hover {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+/* Ícones para os botões (se estiver usando Font Awesome) */
+.comment-actions button .fas {
+    margin-right: 3px;
+}
+
+/* Estilo para o modo de edição */
+.comments-list li.editing {
+    background-color: #fffacd; /* Amarelo claro para indicar edição */
+    border: 1px solid #ffcc00;
+}
+
+.comments-list li.editing .comment-text {
+    display: none; /* Oculta o texto normal quando em edição */
+}
+
+.comments-list li.editing .comment-input-edit {
+    display: block; /* Mostra o input de edição */
+    width: calc(100% - 110px); /* Ajuste de largura para o input de edição */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.comment-input-edit {
+    display: none; /* Oculta o input de edição por padrão */
+}
+
+/* Esconder os botões de ação normais quando em edição */
+.comments-list li.editing .comment-actions .edit-button,
+.comments-list li.editing .comment-actions .delete-button {
+    display: none;
+}
+
+/* Mostrar botões de salvar/cancelar quando em edição */
+.comments-list li.editing .comment-actions .save-button,
+.comments-list li.editing .comment-actions .cancel-button {
+    display: inline-block;
+}
+
+.save-button, .cancel-button {
+    display: none; /* Ocultar por padrão */
+}
+
 .comments-container {
     position: fixed;
     top: 50%;
@@ -624,33 +726,49 @@ footer p:hover {
         padding-bottom: 0.5rem;
     }
 
-    nav ul {
-        display: none; /* Esconde o menu de navegação padrão no mobile */
-        flex-direction: column; /* Para empilhar os itens quando o menu estiver aberto */
-        width: 100%; /* Ocupa a largura total quando visível */
-        background-color: #fff; /* Fundo do menu aberto */
-        position: absolute; /* Posiciona o menu abaixo do header */
-        top: 3.5rem; /* Abaixo do header */
+header nav { /* Seleciona a tag <nav> dentro do <header> */
+        display: none; /* Inicia oculto para mobile */
+        flex-direction: column; /* Para empilhar os links verticalmente */
+        position: absolute; /* Posiciona o menu sobre o conteúdo */
+        top: 3.5rem; /* Ajuste conforme a altura do seu header */
         left: 0;
-        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
-        z-index: 999; /* Garante que o menu esteja acima de outros elementos */
+        width: 100%;
+        background-color: #fff; /* Fundo do menu aberto */
         padding: 1rem 0; /* Padding interno para os itens do menu */
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+        z-index: 999; /* Garante que o menu esteja acima de outros elementos, mas abaixo do header */
+        opacity: 0; /* Para transição de opacidade */
+        transform: translateY(-20px); /* Para transição de movimento */
+        transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* Transição suave */
     }
 
-    /* Classe JavaScript para mostrar o menu */
-    nav.active ul {
-        display: flex; /* Exibe o menu quando a classe 'active' é adicionada */
+    /* Quando a classe 'active' for adicionada via JS */
+    header nav.active {
+        display: flex; /* Exibe o menu */
+        opacity: 1; /* Torna visível */
+        transform: translateY(0); /* Volta à posição original */
     }
 
-    nav ul li {
+    header nav ul { /* Estilos da lista dentro da navegação móvel */
+        flex-direction: column; /* Para empilhar os itens verticalmente */
+        width: 100%; /* Ocupa a largura total quando visível */
+        padding: 0; /* Removido padding extra que conflita com o nav pai */
+    }
+
+    header nav ul li {
         margin: 0; /* Remove a margem lateral entre os itens */
         text-align: center; /* Centraliza o texto dos itens do menu */
     }
 
-    nav ul li a {
+    header nav ul li a {
         display: block; /* Faz o link ocupar toda a largura do item */
         padding: 0.75rem 1.25rem; /* Aumenta a área clicável */
         font-size: 1.1rem; /* Ajusta o tamanho da fonte do menu */
+        color: #555; /* Cor para os links no menu mobile */
+    }
+
+    header nav ul li a:hover {
+        background-color: #f0f0f0; /* Cor de fundo ao passar o mouse no mobile */
     }
 
     .hamburger-menu {

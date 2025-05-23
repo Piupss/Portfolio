@@ -1,162 +1,299 @@
-// Seleciona o título e o contêiner das informações de contato
-const contactTitle = document.querySelector('.contact-title');
-const contactInfo = document.querySelector('.contact-info');
+// A funcionalidade de mostrar/ocultar as informações de contato é puramente CSS agora
+// com base no hover. As linhas abaixo foram removidas para não conflitar.
+ const contactTitle = document.querySelector('.contact-title');
+ const contactInfo = document.querySelector('.contact-info');
+ 
+ contactTitle.addEventListener('click', () => {
+     contactInfo.classList.toggle('show');
+ });
 
-// Adiciona um ouvinte de evento de clique ao título
-contactTitle.addEventListener('click', () => {
-    contactInfo.style.display = contactInfo.style.display === 'none' ? 'block' : 'none';
+// --- Funcionalidade do Menu Hambúrguer ---
+const hamburgerButton = document.querySelector('.hamburger-menu');
+const mainNav = document.querySelector('header nav'); // Seleciona a tag <nav> dentro do <header>
+const navLinks = document.querySelectorAll('header nav ul li a'); // Seleciona todos os links da navegação
+
+hamburgerButton.addEventListener('click', () => {
+    mainNav.classList.toggle('active'); // Alterna a classe 'active' na navegação
+    // Opcional: Alternar ícone do hambúrguer (X ou barras)
+    const hamburgerIcon = hamburgerButton.querySelector('i');
+    if (mainNav.classList.contains('active')) {
+        hamburgerIcon.classList.remove('fa-bars');
+        hamburgerIcon.classList.add('fa-times'); // Ícone de 'X'
+        hamburgerButton.setAttribute('aria-expanded', 'true');
+    } else {
+        hamburgerIcon.classList.remove('fa-times');
+        hamburgerIcon.classList.add('fa-bars'); // Ícone de barras
+        hamburgerButton.setAttribute('aria-expanded', 'false');
+    }
 });
 
-// --- Funcionalidade de Likes, Dislikes e Comentários na Sidebar ---
+// Fechar o menu ao clicar em um link (para navegação mobile)
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        if (mainNav.classList.contains('active')) { // Apenas se o menu estiver aberto
+            mainNav.classList.remove('active'); // Fecha o menu
+            // Retorna o ícone do hambúrguer para barras
+            const hamburgerIcon = hamburgerButton.querySelector('i');
+            hamburgerIcon.classList.remove('fa-times');
+            hamburgerIcon.classList.add('fa-bars');
+            hamburgerButton.setAttribute('aria-expanded', 'false');
+        }
+    });
+});
 
-// 1. Selecionar os elementos HTML necessários usando os IDs que adicionamos
+
+// --- Funcionalidade de Likes, Dislikes e Comentários com persistência e edição ---
+
+// Selecionar os elementos HTML necessários usando os IDs que adicionamos
 const likeButton = document.getElementById('like-button');
 const likeCountSpan = document.getElementById('like-count');
 const dislikeButton = document.getElementById('dislike-button');
-const dislikeCountSpan = document.getElementById('dislike-count'); // Corrigido para refletir o ID no HTML
-const commentButton = document.getElementById('comment-section'); // O botão de comentar é o item inteiro
+const dislikeCountSpan = document.getElementById('dislike-count');
+const commentButton = document.getElementById('comment-section');
 const commentCountSpan = document.getElementById('comment-count');
 
-const commentsBox = document.getElementById('comments-box'); // O contêiner principal da caixa de comentários
-const newCommentInput = document.getElementById('new-comment-input'); // O campo de texto para novo comentário
-const addCommentButton = document.getElementById('add-comment-button'); // O botão para adicionar comentário
-const commentsList = document.getElementById('comments-list'); // A lista onde os comentários serão exibidos
+const commentsBox = document.getElementById('comments-box');
+const newCommentInput = document.getElementById('new-comment-input');
+const addCommentButton = document.getElementById('add-comment-button');
+const commentsList = document.getElementById('comments-list');
 
-// 2. Inicializar as contagens
-// Vamos ler os valores iniciais do HTML. "11K" será tratado como 11000.
-let likeCount = parseInt(likeCountSpan.innerText.replace('K', '')) * 1000;
-let dislikeCount = dislikeCountSpan.innerText === 'Dislike' ? 0 : parseInt(dislikeCountSpan.innerText); // Se for "Dislike", começa com 0
-let commentCount = parseInt(commentCountSpan.innerText);
+// Variáveis para armazenar as contagens e comentários
+let likeCount = 0;
+let dislikeCount = 0;
+let comments = []; // Array para armazenar os comentários
 
-// Variáveis para controlar se o usuário já curtiu/descurtiu (apenas nesta sessão)
+// Variáveis para controlar se o usuário já curtiu/descurtiu
 let hasLiked = false;
 let hasDisliked = false;
 
-// Função para atualizar o texto das contagens na interface
-function updateCountsDisplay() {
-    // Exibe likeCount formatado se for >= 1000, senão exibe o número exato
-    likeCountSpan.innerText = likeCount >= 1000 ? (likeCount / 1000) + 'K' : likeCount;
-    // Exibe dislikeCount, se 0 exibe 'Dislike', senão exibe o número
-    dislikeCountSpan.innerText = dislikeCount === 0 ? 'Dislike' : dislikeCount;
-    // Exibe commentCount
-    commentCountSpan.innerText = commentCount;
+// --- Funções para LocalStorage ---
+
+function saveCounts() {
+    localStorage.setItem('likeCount', likeCount);
+    localStorage.setItem('dislikeCount', dislikeCount);
+    localStorage.setItem('hasLiked', hasLiked);
+    localStorage.setItem('hasDisliked', hasDisliked);
 }
 
-// 3. Adicionar Event Listeners para Like e Dislike
-likeButton.addEventListener('click', () => {
-    if (hasLiked) {
-        // Se já curtiu, remove a curtida
-        likeCount--;
-        hasLiked = false;
-        likeButton.classList.remove('active'); // Remove a classe 'active' visual
-    } else {
-        // Se não curtiu, adiciona a curtida
-        likeCount++;
-        hasLiked = true;
-        likeButton.classList.add('active'); // Adiciona a classe 'active' visual
+function loadCounts() {
+    likeCount = parseInt(localStorage.getItem('likeCount')) || 0;
+    dislikeCount = parseInt(localStorage.getItem('dislikeCount')) || 0;
+    hasLiked = localStorage.getItem('hasLiked') === 'true';
+    hasDisliked = localStorage.getItem('hasDisliked') === 'true';
 
-    // Se tinha descurtido antes, remove o deslike
+    // Atualiza o estado visual dos botões
+    if (hasLiked) {
+        likeButton.classList.add('active');
+    } else {
+        likeButton.classList.remove('active');
+    }
+
     if (hasDisliked) {
-        dislikeCount--;
-        hasDisliked = false;
-        dislikeButton.classList.remove('active'); // Remove a classe 'active' visual
+        dislikeButton.classList.add('active');
+    } else {
+        dislikeButton.classList.remove('active');
     }
 }
-    updateCountsDisplay(); // Atualiza a exibição dos números
+
+function saveComments() {
+    localStorage.setItem('comments', JSON.stringify(comments));
+}
+
+function loadComments() {
+    const storedComments = localStorage.getItem('comments');
+    if (storedComments) {
+        comments = JSON.parse(storedComments);
+        renderComments(); // Renderiza os comentários carregados
+    }
+}
+
+// --- Funções de Renderização e Atualização ---
+
+// Função para atualizar o texto das contagens na interface
+function updateCountsDisplay() {
+    likeCountSpan.innerText = likeCount >= 1000 ? (likeCount / 1000) + 'K' : likeCount;
+    dislikeCountSpan.innerText = dislikeCount === 0 ? 'Dislike' : dislikeCount;
+    commentCountSpan.innerText = comments.length; // Usa o tamanho do array de comentários
+}
+
+// Função para renderizar/re-renderizar a lista de comentários
+function renderComments() {
+    commentsList.innerHTML = ''; // Limpa a lista antes de renderizar
+    comments.forEach((comment, index) => {
+        const commentItem = document.createElement('li');
+        commentItem.dataset.index = index; // Adiciona um índice para referência
+
+        const commentTextSpan = document.createElement('span');
+        commentTextSpan.classList.add('comment-text');
+        commentTextSpan.innerText = comment;
+
+        const editInput = document.createElement('input');
+        editInput.type = 'text';
+        editInput.classList.add('comment-input-edit');
+        editInput.value = comment;
+
+        const actionsDiv = document.createElement('div');
+        actionsDiv.classList.add('comment-actions');
+
+        const editButton = document.createElement('button');
+        editButton.classList.add('edit-button');
+        editButton.innerHTML = '<i class="fas fa-edit"></i> Editar';
+        editButton.addEventListener('click', () => editComment(index, commentTextSpan, editInput, actionsDiv, commentItem));
+
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-button');
+        deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Deletar';
+        deleteButton.addEventListener('click', () => deleteComment(index));
+
+        const saveButton = document.createElement('button');
+        saveButton.classList.add('save-button');
+        saveButton.innerHTML = '<i class="fas fa-save"></i> Salvar';
+        saveButton.addEventListener('click', () => saveEdit(index, editInput, commentTextSpan, actionsDiv, commentItem));
+
+        const cancelButton = document.createElement('button');
+        cancelButton.classList.add('cancel-button');
+        cancelButton.innerHTML = '<i class="fas fa-times-circle"></i> Cancelar';
+        cancelButton.addEventListener('click', () => cancelEdit(commentTextSpan, editInput, actionsDiv, commentItem));
+
+        actionsDiv.appendChild(editButton);
+        actionsDiv.appendChild(deleteButton);
+        actionsDiv.appendChild(saveButton);
+        actionsDiv.appendChild(cancelButton);
+
+        commentItem.appendChild(commentTextSpan);
+        commentItem.appendChild(editInput);
+        commentItem.appendChild(actionsDiv);
+        commentsList.appendChild(commentItem);
+    });
+    updateCountsDisplay(); // Atualiza a contagem de comentários na sidebar
+}
+
+// --- Funções de Ação de Comentários ---
+
+function addComment() {
+    const newCommentText = newCommentInput.value.trim();
+
+    if (newCommentText !== '') {
+        comments.push(newCommentText);
+        newCommentInput.value = '';
+        saveComments();
+        renderComments(); // Re-renderiza para mostrar o novo comentário
+        commentsList.scrollTop = commentsList.scrollHeight; // Scroola para o último
+    }
+}
+
+function deleteComment(index) {
+    if (confirm('Tem certeza que deseja deletar este comentário?')) {
+        comments.splice(index, 1); // Remove o comentário do array
+        saveComments();
+        renderComments(); // Re-renderiza a lista
+    }
+}
+
+function editComment(index, commentTextSpan, editInput, actionsDiv, commentItem) {
+    commentItem.classList.add('editing');
+    editInput.value = commentTextSpan.innerText; // Coloca o texto atual no input de edição
+    editInput.focus(); // Foca no input de edição
+}
+
+function saveEdit(index, editInput, commentTextSpan, actionsDiv, commentItem) {
+    const updatedText = editInput.value.trim();
+    if (updatedText !== '') {
+        comments[index] = updatedText; // Atualiza o comentário no array
+        saveComments();
+        commentItem.classList.remove('editing');
+        renderComments(); // Re-renderiza para refletir a mudança
+    } else {
+        alert('O comentário não pode ser vazio!');
+        editInput.focus();
+    }
+}
+
+function cancelEdit(commentTextSpan, editInput, actionsDiv, commentItem) {
+    commentItem.classList.remove('editing');
+    // Não precisa renderizar novamente, apenas reverte o estado visual
+}
+
+
+// --- Event Listeners (existente) ---
+
+// Likes e Dislikes
+likeButton.addEventListener('click', () => {
+    if (hasLiked) {
+        likeCount--;
+        hasLiked = false;
+        likeButton.classList.remove('active');
+    } else {
+        likeCount++;
+        hasLiked = true;
+        likeButton.classList.add('active');
+        if (hasDisliked) {
+            dislikeCount--;
+            hasDisliked = false;
+            dislikeButton.classList.remove('active');
+        }
+    }
+    updateCountsDisplay();
+    saveCounts(); // Salva no localStorage
 });
 
 dislikeButton.addEventListener('click', () => {
     if (hasDisliked) {
-        // Se já descurtiu, remove o deslike
         dislikeCount--;
         hasDisliked = false;
-        dislikeButton.classList.remove('active'); // Remove a classe 'active' visual
+        dislikeButton.classList.remove('active');
     } else {
-        // Se não descurtiu, adiciona o deslike
         dislikeCount++;
         hasDisliked = true;
-        dislikeButton.classList.add('active'); // Adiciona a classe 'active' visual
-
-    // Se tinha curtido antes, remove o like
-    if (hasLiked) {
-        likeCount--;
-        hasLiked = false;
-    likeButton.classList.remove('active'); // Remove a classe 'active' visual
+        dislikeButton.classList.add('active');
+        if (hasLiked) {
+            likeCount--;
+            hasLiked = false;
+            likeButton.classList.remove('active');
+        }
     }
-}
-    updateCountsDisplay(); // Atualiza a exibição dos números
+    updateCountsDisplay();
+    saveCounts(); // Salva no localStorage
 });
 
-
-// 4. Adicionar Event Listener para o Botão de Comentário (mostrar/esconder caixa)
+// Mostrar/Esconder caixa de comentários
 commentButton.addEventListener('click', () => {
-    // Alterna a visibilidade da caixa de comentários
-        if (commentsBox.style.display === 'flex') {
-    commentsBox.style.display = 'none'; // Esconde se estiver visível
-        } else {
-    commentsBox.style.display = 'flex'; // Mostra se estiver escondido
-    }
+    commentsBox.style.display = commentsBox.style.display === 'flex' ? 'none' : 'flex';
 });
 
-// Opcional: Fechar a caixa de comentários clicando fora dela
-document.addEventListener('click', (event) => {
-    // Verifica se o clique não foi dentro da sidebar OU dentro da commentsBox
-        if (!floatingSidebar.contains(event.target) && !commentsBox.contains(event.target) && commentsBox.style.display === 'flex') {
-    commentsBox.style.display = 'none'; // Esconde a caixa de comentários
-}
-});
-
-// Precisamos selecionar a floatingSidebar para a lógica acima funcionar
 const floatingSidebar = document.querySelector('.floating-sidebar');
 
-
-// 5. Adicionar Event Listener para o Botão "Enviar" Comentário
-addCommentButton.addEventListener('click', () => {
-    const newCommentText = newCommentInput.value.trim(); // Pega o texto do input e remove espaços extras
-
-    if (newCommentText !== '') { // Verifica se o campo não está vazio
-        // Cria um novo elemento <li> para o comentário
-        const newCommentItem = document.createElement('li');
-        newCommentItem.innerText = newCommentText; // Define o texto do comentário
-
-    // Adiciona o novo comentário à lista de comentários
-    commentsList.appendChild(newCommentItem);
-
-    // Limpa o campo de input
-    newCommentInput.value = '';
-
-    // Incrementa a contagem de comentários e atualiza a exibição
-    commentCount++;
-    updateCountsDisplay();
-
-    // Opcional: Scroolar para o último comentário adicionado
-    commentsList.scrollTop = commentsList.scrollHeight;
+document.addEventListener('click', (event) => {
+    // Verifica se o clique não foi dentro da sidebar E não foi dentro da commentsBox
+    // E se a commentsBox está visível
+    if (!floatingSidebar.contains(event.target) && !commentsBox.contains(event.target) && commentsBox.style.display === 'flex') {
+        commentsBox.style.display = 'none';
     }
 });
 
-// Opcional: Adicionar comentário ao pressionar Enter no campo de input
+
+// Adicionar Comentário
+addCommentButton.addEventListener('click', addComment);
 newCommentInput.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
-        event.preventDefault(); // Previne a quebra de linha padrão
-        addCommentButton.click(); // Simula o clique no botão "Enviar"
+        event.preventDefault();
+        addComment();
     }
 });
 
+// Opcional: Adicionar funcionalidade para os outros projetos serem clicáveis
+document.querySelectorAll('.clickable-image').forEach(image => {
+    image.addEventListener('click', () => {
+        const url = image.dataset.url;
+        if (url) {
+            window.open(url, '_blank');
+        }
+    });
+});
 
-// --- Funcionalidade existente (remover ou integrar se necessário) ---
-// Seleciona o título e o contêiner das informações de contato
-// const contactTitle = document.querySelector('.contact-title'); // Já selecionado no HTML
-// const contactInfo = document.querySelector('.contact-info'); // Esta classe não existe no HTML fornecido
-
-// Adiciona um ouvinte de evento de clique ao título (Manter se contactTitle existir no HTML)
-// if (contactTitle) {
-//     contactTitle.addEventListener('click', () => {
-//         // Esta lógica assumia que havia um .contact-info para mostrar/esconder
-//         // Se o objetivo é rolar para a seção de contato, o link href="#contact" já faz isso.
-//         // Se precisar de uma funcionalidade diferente, me diga.
-//     });
-// }
-
-
-// Inicializa a exibição das contagens ao carregar a página
-updateCountsDisplay();
+// --- Inicialização ao carregar a página ---
+document.addEventListener('DOMContentLoaded', () => {
+    loadCounts(); // Carrega contagens do localStorage
+    loadComments(); // Carrega comentários do localStorage
+    updateCountsDisplay(); // Atualiza a exibição inicial
+});
